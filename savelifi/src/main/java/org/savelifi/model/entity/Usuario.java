@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Usuario {
 
-    private List<Despesas> despesas;
+    private List<Despesa> despesa;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,11 +84,11 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public List<Despesas> getDespesas() {
-        return despesas;
+    public List<Despesa> getDespesa() {
+        return despesa;
     }
 
-    public void setDespesas(List<Despesas> despesas) {
-        this.despesas = despesas;
+    public void setDespesa(List<Despesa> despesa) {
+        this.despesa = despesa;
     }
 }

@@ -7,9 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "despesas")
+@Table(name = "despesa")
 
-public class Despesas {
+public class Despesa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

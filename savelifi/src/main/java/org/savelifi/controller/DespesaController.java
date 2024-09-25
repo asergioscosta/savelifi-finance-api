@@ -1,48 +1,48 @@
 package org.savelifi.controller;
 
-import org.savelifi.model.entity.Usuario;
-import org.savelifi.service.UsuarioService;
+import org.savelifi.model.entity.Despesa;
+import org.savelifi.service.DespesaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/usuario")
-public class UsuarioController {
+@RequestMapping("/api/despesa")
+public class DespesaController {
 
-    private final UsuarioService usuarioService;
+    private final DespesaService despesaService;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public DespesaController(DespesaService despesaService) {
+        this.despesaService = despesaService;
     }
 
     @GetMapping()
     public ResponseEntity findAll() {
-        return ResponseEntity.ok(usuarioService.findAll());
+        return ResponseEntity.ok(despesaService.findAll());
     }
 
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
         try {
-            return ResponseEntity.ok(usuarioService.findById(id));
+            return ResponseEntity.ok(despesaService.findById(id));
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping()
-    public ResponseEntity save(@RequestBody Usuario usuario) {
+    public ResponseEntity save(@RequestBody Despesa despesa) {
         try {
-            return ResponseEntity.ok(usuarioService.save(usuario));
+            return ResponseEntity.ok(despesaService.save(despesa));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping()
-    public ResponseEntity edit(@RequestBody Usuario usuario) {
+    public ResponseEntity edit(@RequestBody Despesa despesa) {
         try {
-            return ResponseEntity.ok(usuarioService.save(usuario));
+            return ResponseEntity.ok(despesaService.save(despesa));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -51,7 +51,7 @@ public class UsuarioController {
     @DeleteMapping("{id}")
     public ResponseEntity delete(@PathVariable("id") Long id) {
         try {
-            return ResponseEntity.ok(usuarioService.delete(id));
+            return ResponseEntity.ok(despesaService.delete(id));
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -59,7 +59,6 @@ public class UsuarioController {
 
     @GetMapping("/total")
     public ResponseEntity getTotal() {
-        return ResponseEntity.ok(usuarioService.count());
+        return ResponseEntity.ok(despesaService.count());
     }
-
 }

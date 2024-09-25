@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "orcamentos")
-public class Orcamentos {
+@Table(name = "orcamento")
+public class Orcamento {
 
     @ManyToOne
     private Usuario usuario;
 
-    private List<Despesas> despesas;
+    private List<Despesa> despesa;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,11 +98,11 @@ public class Orcamentos {
         this.dataFimOrcamento = dataFimOrcamento;
     }
 
-    public List<Despesas> getDespesas() {
-        return despesas;
+    public List<Despesa> getDespesa() {
+        return despesa;
     }
 
-    public void setDespesas(List<Despesas> despesas) {
-        this.despesas = despesas;
+    public void setDespesa(List<Despesa> despesa) {
+        this.despesa = despesa;
     }
 }
