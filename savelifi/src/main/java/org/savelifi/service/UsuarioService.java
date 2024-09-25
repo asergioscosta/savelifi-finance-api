@@ -31,8 +31,16 @@ public class UsuarioService {
             throw new Exception("Nome deve ter pelo menos 3 caracteres.");
         }
 
+        if (usuario.getSobrenome() == null) {
+            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
+        }
+
         if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
             throw new Exception("E-mail inválido. Digite um e-mail válido.");
+        }
+
+        if (!validarSenha(usuario.getSenha())) {
+            throw new Exception("A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e caracteres especiais.");
         }
 
         Optional<Usuario> viajanteTemp = usuarioRepository.findByEmail(usuario.getEmail());
@@ -40,10 +48,6 @@ public class UsuarioService {
             if (!Long.valueOf(usuario.getId()).equals(viajanteTemp.get().getId())) {
                 throw new Exception("O email fornecido já está em uso.");
             }
-        }
-
-        if (usuario.getSobrenome() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
         }
 
         if (usuario.getTelefone() == null) {
@@ -63,5 +67,33 @@ public class UsuarioService {
 
     public Long count() {
         return usuarioRepository.count();
+    }
+
+    private boolean validarSenha(String senha) {
+        if (senha == null || senha.length() < 8) {
+            return false;
+        }
+
+        boolean senhaLetraMaiuscula = false;
+        boolean senhaLetraMinuscula = false;
+        boolean senhaNumero = false;
+        boolean senhaaractereEspecial = false;
+
+        for (char c : senha.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                senhaLetraMaiuscula = true;
+            }
+            if (Character.isLowerCase(c)) {
+                senhaLetraMinuscula = true;
+            }
+            if (Character.isDigit(c)) {
+                senhaNumero = true;
+            }
+            if (!Character.isLetterOrDigit(c)) {
+                senhaaractereEspecial = true;
+            }
+        }
+
+        return senhaLetraMaiuscula && senhaLetraMinuscula && senhaNumero && senhaaractereEspecial;
     }
 }

@@ -2,6 +2,7 @@ package org.savelifi.model.entity;
 
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.savelifi.service.FormaPagamento;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -30,7 +31,7 @@ public class Despesa {
 
     @Column
     @NotNull
-    private String formaPagamento;
+    private FormaPagamento formaPagamento;
 
     @Column
     @NotNull
@@ -72,14 +73,6 @@ public class Despesa {
         this.categoriaDespesa = categoriaDespesa;
     }
 
-    public String getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
     public boolean isStatusPagamento() {
         return statusPagamento;
     }
@@ -88,4 +81,11 @@ public class Despesa {
         this.statusPagamento = statusPagamento;
     }
 
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
 }

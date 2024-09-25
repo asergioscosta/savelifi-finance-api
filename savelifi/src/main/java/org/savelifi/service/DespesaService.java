@@ -3,6 +3,7 @@ package org.savelifi.service;
 import org.savelifi.model.entity.Despesa;
 import org.savelifi.model.repository.DespesaRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,16 +32,20 @@ public class DespesaService {
             throw new Exception("Tipo de Despesa inválido. Insira um valor válido.");
         }
 
-        if (despesa.getCategoriaDespesa() == null) {
+        if (despesa.getCategoriaDespesa() == null || despesa.getCategoriaDespesa().isEmpty()) {
             throw new Exception("Categoria de Despesa inválido. Insira um valor válido.");
         }
 
         if (despesa.getFormaPagamento() == null) {
-            throw new Exception("Forma de Pagamento inválido. Insira um valor válido.");
+            throw new Exception("Forma de Pagamento inválida. Insira um valor válido.");
         }
 
+        if (despesa.getData() == null || despesa.getData().after(new Date())) {
+            throw new Exception("Data inválida. Insira uma data válida.");
+        }
         return despesaRepository.save(despesa);
     }
+
 
     public Despesa delete(Long id) throws Exception {
         Optional<Despesa> despesa = despesaRepository.findById(id);

@@ -4,6 +4,7 @@ import org.savelifi.model.entity.Orcamento;
 import org.savelifi.model.repository.OrcamentoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,25 +34,22 @@ public class OrcamentosService {
             throw new Exception("Nome deve ter pelo menos 3 caracteres.");
         }
 
-        if (orcamento.get() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
+        if (orcamento.getValorGasto() <= 0) {
+            throw new Exception("O valor gasto deve ser maior que zero.");
         }
 
-        if (orcamento.getSobrenome() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
+        if (orcamento.getValorPlanejado() <= 0) {
+            throw new Exception("O valor planejado deve ser maior que zero.");
         }
 
-        if (orcamento.getSobrenome() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
+        if (orcamento.getDataInicioOrcamento() == null || orcamento.getDataInicioOrcamento().after(new Date())) {
+            throw new Exception("Data de início do orçamento inválida.");
         }
 
-        if (orcamento.getSobrenome() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
+        if (orcamento.getDataFimOrcamento() == null || orcamento.getDataFimOrcamento().before(orcamento.getDataInicioOrcamento())) {
+            throw new Exception("A data de fim do orçamento deve ser posterior à data de início.");
         }
 
-        if (orcamento.getSobrenome() == null) {
-            throw new Exception("Sobrenome inválido. Digite um sobrenome válido.");
-        }
         return orcamentoRepository.save(orcamento);
     }
 
