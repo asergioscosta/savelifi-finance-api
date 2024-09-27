@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Usuario {
 
+    @OneToMany
     private List<Despesa> despesa;
 
     @Id

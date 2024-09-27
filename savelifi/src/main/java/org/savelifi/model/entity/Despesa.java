@@ -31,13 +31,13 @@ public class Despesa {
 
     @Column
     @NotNull
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
 
     @Column
     @NotNull
     private boolean statusPagamento;
 
-    @Column
     @ManyToOne
     private Usuario usuario;
 

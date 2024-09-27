@@ -14,6 +14,7 @@ public class Orcamento {
     @ManyToOne
     private Usuario usuario;
 
+    @OneToMany
     private List<Despesa> despesa;
 
     @Id

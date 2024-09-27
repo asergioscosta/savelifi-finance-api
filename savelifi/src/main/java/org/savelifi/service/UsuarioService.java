@@ -2,10 +2,12 @@ package org.savelifi.service;
 
 import org.savelifi.model.entity.Usuario;
 import org.savelifi.model.repository.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UsuarioService {
 
     private UsuarioRepository usuarioRepository;

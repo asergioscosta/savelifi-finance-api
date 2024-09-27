@@ -2,11 +2,13 @@ package org.savelifi.service;
 
 import org.savelifi.model.entity.Despesa;
 import org.savelifi.model.repository.DespesaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DespesaService {
 
     private DespesaRepository despesaRepository;
