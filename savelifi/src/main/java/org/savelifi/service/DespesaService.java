@@ -13,7 +13,7 @@ public class DespesaService {
 
     private DespesaRepository despesaRepository;
 
-    private DespesaService(DespesaRepository despesaRepository) {
+    public DespesaService(DespesaRepository despesaRepository) {
         this.despesaRepository = despesaRepository;
     }
 
@@ -52,7 +52,7 @@ public class DespesaService {
     public Despesa delete(Long id) throws Exception {
         Optional<Despesa> despesa = despesaRepository.findById(id);
         if (!despesa.isPresent()) {
-            throw new Exception("Orçamento não encontrado");
+            throw new Exception("Despesa não encontrada");
         }
         despesaRepository.delete(despesa.get());
         return despesa.get();

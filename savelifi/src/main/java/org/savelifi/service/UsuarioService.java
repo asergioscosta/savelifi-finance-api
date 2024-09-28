@@ -23,7 +23,7 @@ public class UsuarioService {
     public Usuario findById(Long id) throws Exception {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (!usuario.isPresent()) {
-            throw new Exception("Orçamento não encontrado");
+            throw new Exception("Usuario não encontrado");
         }
         return usuario.get();
     }
@@ -67,10 +67,6 @@ public class UsuarioService {
         return usuario.get();
     }
 
-    public Long count() {
-        return usuarioRepository.count();
-    }
-
     private boolean validarSenha(String senha) {
         if (senha == null || senha.length() < 8) {
             return false;
@@ -95,7 +91,10 @@ public class UsuarioService {
                 senhaaractereEspecial = true;
             }
         }
-
         return senhaLetraMaiuscula && senhaLetraMinuscula && senhaNumero && senhaaractereEspecial;
+    }
+
+    public long count() {
+        return usuarioRepository.count();
     }
 }
