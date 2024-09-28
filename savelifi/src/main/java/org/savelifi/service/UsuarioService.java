@@ -45,9 +45,9 @@ public class UsuarioService {
             throw new Exception("A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e caracteres especiais.");
         }
 
-        Optional<Usuario> viajanteTemp = usuarioRepository.findByEmail(usuario.getEmail());
-        if (viajanteTemp.isPresent()) {
-            if (!Long.valueOf(usuario.getId()).equals(viajanteTemp.get().getId())) {
+        Optional<Usuario> usuarioTemp = usuarioRepository.findByEmail(usuario.getEmail());
+        if (usuarioTemp.isPresent()) {
+            if (!Long.valueOf(usuario.getId()).equals(usuarioTemp.get().getId())) {
                 throw new Exception("O email fornecido já está em uso.");
             }
         }
