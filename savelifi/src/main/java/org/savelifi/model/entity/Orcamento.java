@@ -11,6 +11,11 @@ import java.util.List;
 @Table(name = "orcamento")
 public class Orcamento {
 
+    @Transient
+    private String conteudoOrcamento;
+    @Transient
+    private Impressao impressao;
+
     @ManyToOne
     private Usuario usuario;
 
@@ -42,6 +47,37 @@ public class Orcamento {
     @Column
     @NotNull
     private Date dataFimOrcamento;
+
+    public Orcamento(String tipoImpressao) {
+        Class classe = null;
+        Object objeto = null;
+        try {
+            classe = Class.forName("model.entity.Orcamento" + tipoImpressao);
+            objeto = classe.newInstance();
+        } catch (Exception ex) {
+            this.impressao = null;
+        }
+        if (!(objeto instanceof Impressao)) {
+            this.impressao = null;
+        }
+        this.impressao = (Impressao) objeto;
+    }
+
+    public Orcamento() {
+
+    }
+
+    private String getConteudoOrcamento() {
+        return conteudoOrcamento;
+    }
+
+    public void setConteudoOrcamento(String conteudoOrcamento) {
+        this.conteudoOrcamento = conteudoOrcamento;
+    }
+
+    public void imprimir() {
+        this.impressao.imprimir(conteudoOrcamento);
+    }
 
     public Usuario getUsuario() {
         return usuario;
